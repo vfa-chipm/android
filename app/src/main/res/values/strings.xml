@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">I Liked</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>Connect</item>
+        <item>Fixtures</item>
+        <item>Table</item>
+    </string-array>
+
+    <string name="menu_1">Menu 1</string>
+    <string name="menu_2">Menu 1</string>
+    <string name="menu_3">Menu 1</string>
+    <string name="menu_4">Menu 1</string>
+</resources>
