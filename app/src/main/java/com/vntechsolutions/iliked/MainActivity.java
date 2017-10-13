@@ -28,30 +28,40 @@ public class MainActivity extends AppCompatActivity {
         bottmNavigation = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
         fragmentManager = getSupportFragmentManager();
-        bottmNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item){
-                int id = item.getItemId();
-                switch (id){
-                    case R.id.action_index:
-                        fragment = new HomeActivity();
-                        break;
-                    case R.id.action_event:
-                        fragment = new EventActivity();
-                        break;
-                    case R.id.action_study:
-                        fragment = new HomeActivity();
-                        break;
-                    case R.id.action_menu_more:
-                        fragment = new EventActivity();
-                        break;
-                }
-                Log.d( TAG , String.valueOf(id));
-                final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.view_page, fragment).commit();
-                return true;
+        bottmNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        changeFragment(new HomeActivity());
+    }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item){
+            int id = item.getItemId();
+            switch (id){
+                case R.id.action_index:
+                    fragment = new HomeActivity();
+                    break;
+                case R.id.action_event:
+                    fragment = new EventActivity();
+                    break;
+                case R.id.action_study:
+                    fragment = new HomeActivity();
+                    break;
+                case R.id.action_menu_more:
+                    fragment = new EventActivity();
+                    break;
             }
-        });
+            Log.d( TAG , String.valueOf(id));
+            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.view_page, fragment).commit();
+            return true;
+        }
+    };
+    private void changeFragment(Fragment fm){
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.view_page, fm);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
     }
     /**
      * A native method that is implemented by the 'native-lib' native library,
