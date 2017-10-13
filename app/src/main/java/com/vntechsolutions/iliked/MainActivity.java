@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private BottomNavigationView bottmNavigation;
     private Fragment fragment;
+    private Fragment f_view_pager;
     private FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.d( TAG , String.valueOf(id));
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.view_page, fragment).commit();
+            transaction.replace(R.id.view_pager, fragment).commit();
             return true;
         }
     };
     private void changeFragment(Fragment fm){
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.view_page, fm);
+        ft.replace(R.id.view_pager, fm);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();
